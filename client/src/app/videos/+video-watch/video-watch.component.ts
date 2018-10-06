@@ -9,6 +9,10 @@ import { NotificationsService } from 'angular2-notifications'
 import { forkJoin, Subscription } from 'rxjs'
 import * as videojs from 'video.js'
 import 'videojs-hotkeys'
+import 'videojs-contrib-ads'
+import 'videojs-ima'
+import 'videojs-contrib-ads/dist/videojs.ads.css';
+import 'videojs-ima/dist/videojs.ima.css';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys'
 import * as WebTorrent from 'webtorrent'
 import { UserVideoRateType, VideoCaption, VideoPrivacy, VideoRateType, VideoState } from '../../../../../shared'
@@ -438,7 +442,13 @@ export class VideoWatchComponent implements OnInit, OnDestroy {
         this.on('customError', (event, data) => self.handleError(data.err))
 
         addContextMenu(self.player, self.video.embedUrl)
+        var options = {
+          id: this.playerElement,
+          adTagUrl: 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/ca-pub-6325344052374966/mala3eb_TOP/mala3eb.tv_Preroll&description_url=http%3A%2F%2Fmala3eb.tv&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&nofb=1&unviewed_position_start=1'
+        };
+        self.player.ima(options)
       })
+      
     })
 
     this.setVideoDescriptionHTML()

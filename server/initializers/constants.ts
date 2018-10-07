@@ -283,6 +283,9 @@ const CONFIG = {
     TWITTER: {
       get USERNAME () { return config.get<string>('services.twitter.username') },
       get WHITELISTED () { return config.get<boolean>('services.twitter.whitelisted') }
+    },
+    get GOOGLE_AD_TAG() {
+      return config.get<string>('services.google_ad_tag')
     }
   }
 }

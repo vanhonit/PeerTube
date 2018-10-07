@@ -19,8 +19,10 @@ export interface ServerConfig {
     allowed: boolean,
     allowedForCurrentIP: boolean,
     requiresEmailVerification: boolean
-  }
-
+  },
+  services: {
+    google_ad_tag: string
+  },
   transcoding: {
     enabledResolutions: number[]
   }

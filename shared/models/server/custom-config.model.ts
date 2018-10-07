@@ -18,7 +18,8 @@ export interface CustomConfig {
     twitter: {
       username: string
       whitelisted: boolean
-    }
+    },
+    google_ad_tag: string
   }
 
   cache: {

@@ -33,7 +33,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill'
 import { environment } from '../../../environments/environment'
 import { getDevLocale, isOnDevLocale } from '@app/shared/i18n/i18n-utils'
 import { VideoCaptionService } from '@app/shared/video-caption'
-
+import { CustomConfig } from '../../../../../shared/models/server/custom-config.model'
 @Component({
   selector: 'my-video-watch',
   templateUrl: './video-watch.component.html',
@@ -87,7 +87,8 @@ export class VideoWatchComponent implements OnInit, OnDestroy {
     private i18n: I18n,
     private hotkeysService: HotkeysService,
     @Inject(LOCALE_ID) private localeId: string
-  ) {}
+  ) {
+  }
 
   get user () {
     return this.authService.getUser()
@@ -442,11 +443,14 @@ export class VideoWatchComponent implements OnInit, OnDestroy {
         this.on('customError', (event, data) => self.handleError(data.err))
 
         addContextMenu(self.player, self.video.embedUrl)
-        var options = {
-          id: this.playerElement,
-          adTagUrl: 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/29016287/KTube_Pre-roll&description_url=http%3A%2F%2F163.172.105.163%2F&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&unviewed_position_start=1'
-        };
-        self.player.ima(options)
+        var config = self.serverService.getConfig()
+        if (config.services && config.services.google_ad_tag) {
+          var options = {
+            id: this.playerElement,
+            adTagUrl: config.services.google_ad_tag
+          };
+          self.player.ima(options)
+        }
       })
       
     })

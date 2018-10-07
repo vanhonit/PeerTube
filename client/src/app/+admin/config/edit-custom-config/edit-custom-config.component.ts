@@ -73,6 +73,7 @@ export class EditCustomConfigComponent extends FormReactive implements OnInit {
       instanceDefaultNSFWPolicy: null,
       servicesTwitterUsername: this.customConfigValidatorsService.SERVICES_TWITTER_USERNAME,
       servicesTwitterWhitelisted: null,
+      googleAdTag: null,
       cachePreviewsSize: this.customConfigValidatorsService.CACHE_PREVIEWS_SIZE,
       cacheCaptionsSize: this.customConfigValidatorsService.CACHE_CAPTIONS_SIZE,
       signupEnabled: null,
@@ -163,7 +164,8 @@ export class EditCustomConfigComponent extends FormReactive implements OnInit {
         twitter: {
           username: this.form.value['servicesTwitterUsername'],
           whitelisted: this.form.value['servicesTwitterWhitelisted']
-        }
+        },
+        google_ad_tag: this.form.value['googleAdTag']
       },
       cache: {
         previews: {
@@ -235,6 +237,7 @@ export class EditCustomConfigComponent extends FormReactive implements OnInit {
       instanceDefaultNSFWPolicy: this.customConfig.instance.defaultNSFWPolicy,
       servicesTwitterUsername: this.customConfig.services.twitter.username,
       servicesTwitterWhitelisted: this.customConfig.services.twitter.whitelisted,
+      googleAdTag: this.customConfig.services.google_ad_tag,
       cachePreviewsSize: this.customConfig.cache.previews.size,
       cacheCaptionsSize: this.customConfig.cache.captions.size,
       signupEnabled: this.customConfig.signup.enabled,

@@ -49,7 +49,7 @@ async function getConfig (req: express.Request, res: express.Response, next: exp
   const enabledResolutions = Object.keys(CONFIG.TRANSCODING.RESOLUTIONS)
    .filter(key => CONFIG.TRANSCODING.ENABLED === CONFIG.TRANSCODING.RESOLUTIONS[key] === true)
    .map(r => parseInt(r, 10))
-
+  console.log('fsdfdsadasdsadasdsadsas' + CONFIG.SERVICES.GOOGLE_AD_TAG)
   const json: ServerConfig = {
     instance: {
       name: CONFIG.INSTANCE.NAME,
@@ -67,6 +67,9 @@ async function getConfig (req: express.Request, res: express.Response, next: exp
       allowed,
       allowedForCurrentIP,
       requiresEmailVerification: CONFIG.SIGNUP.REQUIRES_EMAIL_VERIFICATION
+    },
+    services: {
+      google_ad_tag: CONFIG.SERVICES.GOOGLE_AD_TAG
     },
     transcoding: {
       enabledResolutions
@@ -113,7 +116,7 @@ async function getConfig (req: express.Request, res: express.Response, next: exp
       videoQuotaDaily: CONFIG.USER.VIDEO_QUOTA_DAILY
     }
   }
-
+  console.log(json)
   return res.json(json)
 }
 
@@ -219,7 +222,8 @@ function customConfig (): CustomConfig {
       twitter: {
         username: CONFIG.SERVICES.TWITTER.USERNAME,
         whitelisted: CONFIG.SERVICES.TWITTER.WHITELISTED
-      }
+      },
+      google_ad_tag: CONFIG.SERVICES.GOOGLE_AD_TAG
     },
     cache: {
       previews: {

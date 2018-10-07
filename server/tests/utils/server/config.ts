@@ -62,7 +62,8 @@ function updateCustomSubConfig (url: string, token: string, newConfig: any) {
       twitter: {
         username: '@MySuperUsername',
         whitelisted: true
-      }
+      },
+      google_ad_tag: ''
     },
     cache: {
       previews: {

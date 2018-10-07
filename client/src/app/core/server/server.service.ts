@@ -43,6 +43,9 @@ export class ServerService {
       allowedForCurrentIP: false,
       requiresEmailVerification: false
     },
+    services: {
+      google_ad_tag: ''
+    },
     transcoding: {
       enabledResolutions: []
     },

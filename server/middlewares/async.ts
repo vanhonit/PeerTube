@@ -1,7 +1,6 @@
 import { eachSeries } from 'async'
 import { NextFunction, Request, RequestHandler, Response } from 'express'
 import { retryTransactionWrapper } from '../helpers/database-utils'
-import { Response } from 'oauth2-server';
 
 // Syntactic sugar to avoid try/catch in express controllers
 // Thanks: https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016

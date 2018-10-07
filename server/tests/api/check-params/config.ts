@@ -30,7 +30,8 @@ describe('Test config API validators', function () {
       twitter: {
         username: '@MySuperUsername',
         whitelisted: true
-      }
+      },
+      google_ad_tag: ''
     },
     cache: {
       previews: {

@@ -138,7 +138,8 @@ describe('Test config', function () {
         twitter: {
           username: '@Kuja',
           whitelisted: true
-        }
+        },
+        google_ad_tag: ''
       },
       cache: {
         previews: {

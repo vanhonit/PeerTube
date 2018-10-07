@@ -444,7 +444,7 @@ export class VideoWatchComponent implements OnInit, OnDestroy {
         addContextMenu(self.player, self.video.embedUrl)
         var options = {
           id: this.playerElement,
-          adTagUrl: 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/ca-pub-6325344052374966/mala3eb_TOP/mala3eb.tv_Preroll&description_url=http%3A%2F%2Fmala3eb.tv&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&nofb=1&unviewed_position_start=1'
+          adTagUrl: 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/29016287/KTube_Pre-roll&description_url=http%3A%2F%2F163.172.105.163%2F&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&unviewed_position_start=1'
         };
         self.player.ima(options)
       })

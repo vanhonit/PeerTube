@@ -24,7 +24,9 @@ function isMobile () {
 }
 
 function buildVideoLink (time?: number, url?: string) {
-  if (!url) url = window.location.origin + window.location.pathname.replace('/embed/', '/watch/')
+  // console.log(url);
+  // if (!url) url = window.location.origin + window.location.pathname.replace('/embed/', '/watch/')
+  if (!url) url = window.location.origin + window.location.pathname.replace('/watch/', '/embed/')
 
   if (time) {
     const timeInt = Math.floor(time)

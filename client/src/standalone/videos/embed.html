@@ -8,6 +8,104 @@
     <meta name="robots" content="noindex">
 
     <link rel="icon" type="image/png" href="/client/assets/images/favicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.story.min.js"></script>
+  
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <style>
+      #ads{
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translate(-50%);
+      width: 468px;
+      height: 60px;
+      }
+      #ads .close-btn{
+      background: #000 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAi0lEQVRIie2USw3AIBAFKwEJSEBKHVYCEpCApOkBmjSbAMvn1PKubGYuE45j758DHOABo7g1wAW4HoEnLdYkGf7chh6ByfCiRMAjYNWClmQaXpMsg1ck6+AFyVr4S+CFoJnwCDy26pqFW03Cw3DxNi7RpDglIf0tzVqEpOurcEDQpJglATjVgr1v7QZvKZtMpuzeRwAAAABJRU5ErkJggg==) center center no-repeat;
+      position: absolute;
+      display: block;
+      height: 16px;
+      width: 16px;
+      top: 0;
+      right: 0;
+      background-size: 18px 18px;
+      cursor: pointer;
+      padding: 1px;
+      }
+      #sharebuttons{
+        padding-bottom: 10px;
+        text-align: left;
+      }
+      #sharebuttons p{
+        margin: 9px 0;
+      }
+      .addthis_inline_share_toolbox{
+        clear: none;
+        margin-right: 0.5em;
+        float: left;
+      }
+      .btn-container{
+        display: inline-block;
+        margin: 0 0.5em 0 0;
+        float: left;
+        margin-top: 2px;
+      }
+      .zalo-container{
+        display: inline-block;
+        background-color: #03a5fa;
+        border-radius: 3px;
+        height: 26px;
+        padding-top: 3px;
+        margin-left: -4px;
+      }
+      #shareBtn{
+        position: absolute;
+        display: block;
+        top: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+      img{border:0;}
+      button,input{color:inherit;font:inherit;margin:0;}
+      button{overflow:visible;}
+      button{text-transform:none;}
+      button{-webkit-appearance:button;cursor:pointer;}
+      button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+      input{line-height:normal;}
+      *{box-sizing:border-box;}
+      input,button{font:13px/1.4 Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}
+      input[type=text]{min-height:34px;padding:7px 8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:right 8px center;border:1px solid #ccc;border-radius:3px;outline:0;box-shadow:inset 0 1px 2px rgba(0,0,0,.075);}
+      input[type=text]:focus{border-color:#51a7e8;box-shadow:inset 0 1px 2px rgba(0,0,0,.075),0 0 5px rgba(81,167,232,.5);}
+      ::-webkit-input-placeholder{color:#aaa;}
+      ::-moz-placeholder{color:#aaa;}
+      :-ms-input-placeholder{color:#aaa;}
+      ::placeholder{color:#aaa;}
+      .input-group{display:table;}
+      .input-group input{position:relative;width:100%;}
+      .input-group input:focus{z-index:2;}
+      .input-group input,.input-group-button{display:table-cell;}
+      .input-group-button{width:1%;vertical-align:middle;}
+      .input-group input:first-child{border-top-right-radius:0;border-bottom-right-radius:0;}
+      .input-group-button:last-child .btn{border-top-left-radius:0;border-bottom-left-radius:0;}
+      .input-group-button:last-child .btn{margin-left:-1px;}
+      .btn{position:relative;display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-appearance:none;}
+      .btn:focus{text-decoration:none;border-color:#51a7e8;outline:0;box-shadow:0 0 5px rgba(81,167,232,.5);}
+      .btn:focus:hover{border-color:#51a7e8;}
+      .btn:hover,.btn:active{text-decoration:none;background-color:#ddd;background-image:linear-gradient(#eee,#ddd);border-color:#ccc;}
+      .btn:active{background-color:#dcdcdc;background-image:none;border-color:#b5b5b5;box-shadow:inset 0 2px 4px rgba(0,0,0,.15);}
+      .btn:disabled,.btn:disabled:hover{color:rgba(102,102,102,.5);cursor:default;background-color:rgba(229,229,229,.5);background-image:none;border-color:rgba(197,197,197,.5);box-shadow:none;}
+      /*! CSS Used from: https://clipboardjs.com/assets/styles/main.css */
+      .clippy{margin-top:-3px;position:relative;top:3px;}
+        
+  .clear{
+    clear: both;
+  }
+    </style>
   </head>
 
   <body>
@@ -20,6 +118,94 @@
 
     <video playsinline="true" id="video-container" class="video-js vjs-peertube-skin">
     </video>
-
+    <p><a href="#sharebuttons" id="shareBtn" class="fas fa-share-square" rel="modal:open"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABtklEQVRYhe3XP0hVYRzGcdMoVIoWA2kQlBqa+jO1tRSEYTiJ4hRNTtKdm9pqbGhramhoaKm1JhcnhYaoUYIEqatSGurH4b7B6XKP97zvOVcizgM/OMNznvf7/t5zOL/T11erVq1a/48whomyIacwh4cJ1cATXM/JvoIlnC0D+EE5fcFoTvZg8HwtA3hQAu5Vgfxm8K6mAm4nwr08IvM8bmAWPzP3rKA/FnAzE7CDx3jUpRY75NzEUyx32dgqBlMBf0TtrnX/CF5Edv8jhlMAN3EmAm4cW5Fwf/QJJ3sGiHP+fr5StNZLwJWScHC/J4CYqQBuqkgjogHRj285i25ofTne4W243uvgu1cILhHwWttie3iDOxjo4G+2+ScLwyUCNjL+1xg5wjuE7xn/rSi4RMDPwTtfIPt0JvtuNFwsIC7gN2YLZk+E3AdJcAmAF+WMVjn+S+3HKnb0ij3iVIXuv8flfw4wHPVuWKP4oHAcgLiN/ZDfjM5XcpopkH9QqgFtgL+0/jUWKqpGFYCpE3WKtiS8xfvdUivUroQOLh0j4DpOxAJexTOtsb2X9RzTUXC1atWqVb0OATorPOFHUYDIAAAAAElFTkSuQmCC" alt=""></a></p>
+    <div id="sharebuttons" class="modal">
+      <p>
+        <strong>Share with your friends</strong>
+      </p>
+      <!-- Sharingbutton ZALO -->
+      <div class="addthis_inline_share_toolbox"></div>
+      <div class="zalo-container btn-container">
+        <div class="zalo-share-button" data-href="" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
+      </div>
+      <div class="kakao-container btn-container">
+        <div id="kakaostory-share-button" data-url=""></div>
+      </div>
+      <div class="shareNaver-container btn-container">
+        <script src="//share.naver.net/js/naver_sharebutton.js" onload="new ShareNaver.makeButton({'type': 'c'});" async="async"></script>
+      </div>
+      <div class="clear"></div>
+      <h4>URL:</h4>
+      <div class="input-group">
+        <input id="url" type="text" value="" readonly>
+        <span class="input-group-button">
+          <button class="btn" type="button" data-clipboard-demo data-clipboard-target="#url">
+          <img class="clippy" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTAyNCIgd2lkdGg9Ijg5NiI+CiAgPHBhdGggZD0iTTEyOCA3NjhoMjU2djY0SDEyOHYtNjR6IG0zMjAtMzg0SDEyOHY2NGgzMjB2LTY0eiBtMTI4IDE5MlY0NDhMMzg0IDY0MGwxOTIgMTkyVjcwNGgzMjBWNTc2SDU3NnogbS0yODgtNjRIMTI4djY0aDE2MHYtNjR6TTEyOCA3MDRoMTYwdi02NEgxMjh2NjR6IG01NzYgNjRoNjR2MTI4Yy0xIDE4LTcgMzMtMTkgNDVzLTI3IDE4LTQ1IDE5SDY0Yy0zNSAwLTY0LTI5LTY0LTY0VjE5MmMwLTM1IDI5LTY0IDY0LTY0aDE5MkMyNTYgNTcgMzEzIDAgMzg0IDBzMTI4IDU3IDEyOCAxMjhoMTkyYzM1IDAgNjQgMjkgNjQgNjR2MzIwaC02NFYzMjBINjR2NTc2aDY0MFY3Njh6TTEyOCAyNTZoNTEyYzAtMzUtMjktNjQtNjQtNjRoLTY0Yy0zNSAwLTY0LTI5LTY0LTY0cy0yOS02NC02NC02NC02NCAyOS02NCA2NC0yOSA2NC02NCA2NGgtNjRjLTM1IDAtNjQgMjktNjQgNjR6Ii8+Cjwvc3ZnPg==" width="13" alt="Copy to clipboard">
+        </button>
+        </span>
+      </div>
+      <h4>Embed code:</h4>
+      <div class="input-group">
+        <input id="embed_code" type="text" value="" readonly>
+        <span class="input-group-button">
+          <button class="btn" type="button" data-clipboard-demo data-clipboard-target="#embed_code">
+          <img class="clippy" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTAyNCIgd2lkdGg9Ijg5NiI+CiAgPHBhdGggZD0iTTEyOCA3NjhoMjU2djY0SDEyOHYtNjR6IG0zMjAtMzg0SDEyOHY2NGgzMjB2LTY0eiBtMTI4IDE5MlY0NDhMMzg0IDY0MGwxOTIgMTkyVjcwNGgzMjBWNTc2SDU3NnogbS0yODgtNjRIMTI4djY0aDE2MHYtNjR6TTEyOCA3MDRoMTYwdi02NEgxMjh2NjR6IG01NzYgNjRoNjR2MTI4Yy0xIDE4LTcgMzMtMTkgNDVzLTI3IDE4LTQ1IDE5SDY0Yy0zNSAwLTY0LTI5LTY0LTY0VjE5MmMwLTM1IDI5LTY0IDY0LTY0aDE5MkMyNTYgNTcgMzEzIDAgMzg0IDBzMTI4IDU3IDEyOCAxMjhoMTkyYzM1IDAgNjQgMjkgNjQgNjR2MzIwaC02NFYzMjBINjR2NTc2aDY0MFY3Njh6TTEyOCAyNTZoNTEyYzAtMzUtMjktNjQtNjQtNjRoLTY0Yy0zNSAwLTY0LTI5LTY0LTY0cy0yOS02NC02NC02NC02NCAyOS02NCA2NC0yOSA2NC02NCA2NGgtNjRjLTM1IDAtNjQgMjktNjQgNjR6Ii8+Cjwvc3ZnPg==" width="13" alt="Copy to clipboard">
+        </button>
+        </span>
+      </div>
+    </div>
+    
+    <div id="ads" style="display: none;">
+      <a href="#" class="close-btn"></a>
+      <a href="" class="ads-link" target="_blank"><img src="" alt=""></a>
+    </div>
+    <script>
+      jQuery(document).ready(function() {
+        jQuery('#url').val(window.location.href);
+        jQuery('.zalo-share-button').attr('data-href', window.location.href);
+        jQuery('#kakaostory-share-button').attr('data-url', window.location.href);
+        jQuery('#embed_code').val('<iframe width="480" height="270" ' +
+                              'sandbox="allow-same-origin allow-scripts" ' +
+                              'src="' + window.location.href + '" ' +
+                              'frameborder="0" allowfullscreen>' +
+                              '</iframe>');
+        var zalo = document.createElement("script");
+            zalo.type = "text/javascript";
+            zalo.src = "//sp.zalo.me/plugins/sdk.js";
+        document.body.appendChild(zalo);
+        Kakao.Story.createShareButton({
+          container: '#kakaostory-share-button'
+        });
+      // Fetch ads information
+      jQuery.get('https://syndication.exdynsrv.com/splash.php?idzone=3101616', function(xml) {
+        var img_url = xml.querySelector('StaticResource').textContent;
+        var ads_url = xml.querySelector('NonLinearClickThrough').textContent;
+        
+        jQuery('#ads img').attr('src', img_url);
+        jQuery('#ads a').attr('href', ads_url);
+        
+        jQuery('.video-js').append(jQuery('#ads'));
+      });
+      
+      jQuery('#ads .close-btn').click(function(event) {
+        jQuery('#ads').fadeOut();
+        
+        event.preventDefault();
+      });
+      
+      // Clipboard copy
+      new ClipboardJS('.btn');
+      });
+      
+      var checkAds = setInterval(function() {
+      if( jQuery('.vjs-has-big-play-button-clicked').length ) {
+        jQuery('#ads').fadeIn();
+        
+        clearInterval(checkAds);
+      }
+      }, 1000);
+    </script>
+    <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <script type="text/javascript" async="" id="addthis-widget" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5215a6660736261a"></script>
   </body>
 </html>

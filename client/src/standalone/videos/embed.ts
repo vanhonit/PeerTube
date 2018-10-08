@@ -19,6 +19,9 @@ import 'whatwg-fetch'
 
 import * as vjs from 'video.js'
 import * as Channel from 'jschannel'
+import 'videojs-hotkeys'
+import 'videojs-contrib-ads'
+import 'videojs-ima'
 
 import { peertubeTranslate, ResultList, VideoDetails } from '../../../../shared'
 import { addContextMenu, getServerTranslations, getVideojsOptions, loadLocaleInVideoJS } from '../../assets/player/peertube-player'
@@ -161,6 +164,7 @@ class PeerTubeEmbed {
   enableApi = false
   startTime: number | string = 0
   scope = 'peertube'
+  config = null
 
   static async main () {
     const videoContainerId = 'video-container'
@@ -178,6 +182,10 @@ class PeerTubeEmbed {
 
   loadVideoInfo (videoId: string): Promise<Response> {
     return fetch(this.getVideoUrl(videoId))
+  }
+
+  loadConfig (): Promise<Response> {
+    return fetch(window.location.origin + '/api/v1/config/')
   }
 
   loadVideoCaptions (videoId: string): Promise<Response> {
@@ -257,9 +265,10 @@ class PeerTubeEmbed {
     const lastPart = urlParts[ urlParts.length - 1 ]
     const videoId = lastPart.indexOf('?') === -1 ? lastPart : lastPart.split('?')[ 0 ]
 
-    const [ , serverTranslations, videoResponse, captionsResponse ] = await Promise.all([
+    const [ , serverTranslations, configResponse, videoResponse, captionsResponse ] = await Promise.all([
       loadLocaleInVideoJS(window.location.origin, vjs, navigator.language),
       getServerTranslations(window.location.origin, navigator.language),
+      this.loadConfig(),
       this.loadVideoInfo(videoId),
       this.loadVideoCaptions(videoId)
     ])
@@ -279,6 +288,9 @@ class PeerTubeEmbed {
         language: c.language.id,
         src: window.location.origin + c.captionPath
       }))
+    }
+    if (configResponse.ok) {
+      this.config = await configResponse.json()
     }
 
     this.loadParams()
@@ -316,7 +328,13 @@ class PeerTubeEmbed {
       }
 
       addContextMenu(this.player, window.location.origin + videoInfo.embedPath)
-
+      if (this.config.services && this.config.services.google_ad_tag) {
+        var options = {
+          id: this.videoElement,
+          adTagUrl: this.config.services.google_ad_tag
+        };
+        this.player.ima(options)
+      }
       this.initializeApi()
     })
   }

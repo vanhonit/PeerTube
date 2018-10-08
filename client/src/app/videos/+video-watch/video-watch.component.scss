@@ -42,7 +42,9 @@ $other-videos-width: 260px;
   /deep/ .video-js {
     width: 888px;
     height: 500px;
-
+    &.vjs-peertube-skin .vjs-control-bar .vjs-peertube {
+      opacity: 0 !important; 
+    }
     &.vjs-theater-enabled {
       height: calc(100vh - #{$header-height} - #{$theater-bottom-space});
       width: 100%;

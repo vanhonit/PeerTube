@@ -70,7 +70,7 @@ function secondsToTime (seconds: number) {
 }
 
 function buildVideoEmbed (embedUrl: string) {
-  return '<iframe width="560" height="315" ' +
+  return '<iframe width="480" height="270" ' +
     'sandbox="allow-same-origin allow-scripts" ' +
     'src="' + embedUrl + '" ' +
     'frameborder="0" allowfullscreen>' +

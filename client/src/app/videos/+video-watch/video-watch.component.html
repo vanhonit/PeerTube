@@ -203,7 +203,7 @@
     </div>
   </div>
 
-  <div class="privacy-concerns" *ngIf="hasAlreadyAcceptedPrivacyConcern === false">
+  <!--<div class="privacy-concerns" *ngIf="hasAlreadyAcceptedPrivacyConcern === false">
     <div class="privacy-concerns-text">
       <strong i18n>Friendly Reminder: </strong>
       <ng-container i18n>
@@ -215,7 +215,7 @@
     <div i18n class="privacy-concerns-okay" (click)="acceptedPrivacyConcern()">
       OK
     </div>
-  </div>
+  </div>-->
 
 <ng-template [ngIf]="video !== null">
   <my-video-support #videoSupportModal [video]="video"></my-video-support>

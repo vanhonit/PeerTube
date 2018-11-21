@@ -181,10 +181,10 @@
       </div>
     </div>
     
-    <!-- <div id="ads" style="display: none;"> -->
-      <!-- <a href="#" class="close-btn"></a> -->
-      <!-- <a href="" class="ads-link" target="_blank"><img src="" alt=""></a> -->
-    <!-- </div> -->
+    <div id="ads" style="display: none;">
+      <a href="#" class="close-btn"></a>
+      <a href="" class="ads-link" target="_blank"><img src="" alt=""></a>
+    </div>
     <script>
       jQuery(document).ready(function() {
         jQuery('#url').val(window.location.href);
@@ -203,15 +203,15 @@
           container: '#kakaostory-share-button'
         });
       // Fetch ads information
-      // jQuery.get('https://syndication.exdynsrv.com/splash.php?idzone=3101616', function(xml) {
-      //   var img_url = xml.querySelector('StaticResource').textContent;
-      //   var ads_url = xml.querySelector('NonLinearClickThrough').textContent;
+      jQuery.get('https://syndication.exdynsrv.com/splash.php?idzone=3101616', function(xml) {
+        var img_url = xml.querySelector('StaticResource').textContent;
+        var ads_url = xml.querySelector('NonLinearClickThrough').textContent;
         
-      //   jQuery('#ads img').attr('src', img_url);
-      //   jQuery('#ads a').attr('href', ads_url);
+        jQuery('#ads img').attr('src', img_url);
+        jQuery('#ads a').attr('href', ads_url);
         
-      //   jQuery('.video-js').append(jQuery('#ads'));
-      // });
+        jQuery('.video-js').append(jQuery('#ads'));
+      });
       
       jQuery('#ads .close-btn').click(function(event) {
         jQuery('#ads').fadeOut();

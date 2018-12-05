@@ -100,6 +100,7 @@
     "cors": "^2.8.1",
     "create-torrent": "^3.24.5",
     "deep-object-diff": "^1.1.0",
+    "event-stream": "^4.0.1",
     "express": "^4.12.4",
     "express-oauth-server": "^2.0.0",
     "express-rate-limit": "^3.1.0",
